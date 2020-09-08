@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-12 blog-main">
+      <h3 class="pb-4 mb-4 font-italic border-bottom">
+        There is {{blogs.count}} Blog{{blogs.count|pluralize}}
+      </h3>
+    {% for blog in blogs %}
+      <div class="blog-post">
+        <a href="{% url 'blog:blog_detail' blog.id %}"> <h2 class="blog-post-title">{{blog.title}}</h2> </a>
+        <p class="blog-post-meta">{{blog.date|date:'M d Y'}}</p>
+
+        <p>{{blog.description|safe|truncatechars:100}}</p>
+
+      </div><!-- /.blog-post -->
+    {% endfor %}
+      <nav class="blog-pagination">
+        <a class="btn btn-outline-primary" href="#">Older</a>
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+      </nav>
+
+    </div><!-- /.blog-main -->
+
+
+
+  </div><!-- /.row -->
+
+</main><!-- /.container -->
+
+{% endblock %}
